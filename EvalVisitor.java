@@ -147,4 +147,22 @@ public class EvalVisitor extends KSU_langBaseVisitor<Object> {
         }
         return null;
     }
+
+    @Override
+    public Object visitFor(KSU_langParser.ForContext ctx) {
+        if (ctx.expr(0) != null) {
+            visit(ctx.expr(0));
+        }
+
+        while ((Boolean) visit(ctx.expr(1))) {
+            visit(ctx.stat());
+
+            if (ctx.expr(2) != null) {
+                visit(ctx.expr(2));
+            }
+        }
+
+        return null;
+    }
+
 }

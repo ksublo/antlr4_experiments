@@ -11,10 +11,9 @@ stat
     | '{' stat* '}'                           // block
     | 'if' '(' expr ')' stat ('else' stat)?   // if/else
     | 'while' '(' expr ')' stat               // while
-    | 'for' '(' expr? ';' expr? ';' expr? ')' stat // for loop
     ;
 
-type: 'int' | 'float' | 'bool' | 'string';
+type: 'int' | 'float' | 'bool' | 'string' ;
 
 idList: ID (',' ID)*;
 
