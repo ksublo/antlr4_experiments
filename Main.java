@@ -1,21 +1,16 @@
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
+import java.io.PrintWriter;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         String inputText = """
-                          int a,b;
-                          a = b = 15;
-                          a + b;
-                          a % b;
-                          float c;
-                          c = a + b;
-                          c + a;
-                          a = c;
-                          c + 1.1;
-                          c % a;
-    """;
-
+int i;
+for (i = 0; i < 3; i = i + 1) {
+  write i;
+}
+""";
 
         CharStream input = CharStreams.fromString(inputText);
         KSU_langLexer lexer = new KSU_langLexer(input);
@@ -40,9 +35,20 @@ public class Main {
             checker.printErrors();
             System.err.println("Type checking failed.");
         } else {
-            EvalVisitor visitor = new EvalVisitor();
+            EvalVisitor visitor = new EvalVisitor(checker.getSymbolTable());
             visitor.visit(tree);
-        }
 
+            List<String> instructions = visitor.getInstructions();
+
+            try (PrintWriter writer = new PrintWriter("input.txt")) {
+                for (String instr : instructions) {
+                    writer.println(instr);
+                }
+                System.out.println("Lab 9 output saved to input.txt (Lab 10 compatible)");
+            } catch (Exception e) {
+                System.err.println("Failed to write to input.txt");
+                e.printStackTrace();
+            }
+        }
     }
 }

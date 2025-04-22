@@ -1,0 +1,15 @@
+PUSH I 0
+SAVE i
+LABEL for_start_0
+LOAD i
+PUSH I 3
+CMPLT
+JZ for_end_1
+LOAD i
+PRINT I
+LOAD i
+PUSH I 1
+ADD
+SAVE i
+JMP for_start_0
+LABEL for_end_1

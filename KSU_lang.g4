@@ -3,15 +3,15 @@ grammar KSU_lang;
 prog: stat* EOF;
 
 stat
-    : ';'                                     // empty statement
-    | type idList ';'                         // declaration
-    | expr ';'                                // expression
-    | 'read' idList ';'                       // read
-    | 'write' exprList ';'                    // write
-    | '{' stat* '}'                           // block
-    | 'if' '(' expr ')' stat ('else' stat)?   // if/else
-    | 'while' '(' expr ')' stat               // while
-    | 'for' '(' expr? ';' expr? ';' expr? ')' stat // for loop
+    : ';'                                       // empty statement
+    | type idList ';'                           // declaration
+    | expr ';'                                  // expression
+    | 'read' idList ';'                         // read
+    | 'write' exprList ';'                      // write
+    | '{' stat* '}'                             // block
+    | 'if' '(' expr ')' stat ('else' stat)?     // if/else
+    | 'while' '(' expr ')' stat                 // while
+    | 'for' '(' expr? ';' expr? ';' expr? ')' stat
     ;
 
 type: 'int' | 'float' | 'bool' | 'string';
